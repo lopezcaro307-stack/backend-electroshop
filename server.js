@@ -177,6 +177,10 @@ app.post("/enviar-correo", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("Backend funcionando 🚀");
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
