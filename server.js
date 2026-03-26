@@ -129,12 +129,11 @@ app.post("/crear-pago", async (req, res) => {
           currency_id: "MXN"
         })),
         back_urls: {
-          back_urls: {
   success: "https://tiendatelefoniabwac.com.mx/success.html",
   failure: "https://tiendatelefoniabwac.com.mx/error.html",
   pending: "https://tiendatelefoniabwac.com.mx/pendiente.html"
 }
-        }
+        
       }
     });
 
