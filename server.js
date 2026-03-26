@@ -171,10 +171,17 @@ app.post("/enviar-correo", async (req, res) => {
     res.json({ ok: true, mensaje: "Correo enviado correctamente" });
 
   } catch (error) {
-    console.error("❌ Error enviando correo:", error);
-    res.status(500).json({ error: "Error al enviar correo" });
+  console.error("❌ Error real:", error);
+
+  if (error?.cause) {
+    console.error("📌 Detalle:", error.cause);
   }
-});
+
+  res.status(500).json({
+    error: "Error al crear pago",
+    detalle: error.message
+  });
+}
 
 app.get("/", (req, res) => {
   res.send("Backend funcionando 🚀");
