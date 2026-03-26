@@ -7,8 +7,23 @@ import { MercadoPagoConfig, Preference } from "mercadopago";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "*", // puedes restringir luego
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
+
 app.use(express.json());
+
+// 🔐 HEADERS EXTRA (IMPORTANTE PARA RENDER)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+// 🔧 NECESARIO EN RENDER
+app.set("trust proxy", 1);
 
 // 🔐 MERCADO PAGO
 const client = new MercadoPagoConfig({
